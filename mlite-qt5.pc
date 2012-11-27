@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include/mlite-qt5
+
+Name: mlite
+Description: Selected classes pulled from the MeeGo Touch Framework
+Version: 0.0.8
+Cflags: -I${includedir}
+Libs: -L${libdir} -lmlite-qt5
+Requires: QtDBus QtGui

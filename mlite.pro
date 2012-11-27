@@ -1,7 +1,11 @@
 system(qdbusxml2cpp notificationmanager.xml -p mnotificationmanagerproxy -c MNotificationManagerProxy -i metatypedeclarations.h)
 
+VERSION = 0.0.10
+equals(QT_MAJOR_VERSION, 5): PROJECT_NAME = mlite-qt5
+else: PROJECT_NAME = mlite
+
 QT     = core dbus
-TARGET = $$qtLibraryTarget(mlite)
+TARGET = $$qtLibraryTarget($${PROJECT_NAME})
 TEMPLATE = lib
 
 DEFINES += MLITE_LIBRARY
@@ -70,19 +74,17 @@ INSTALL_HEADERS += \
     mfiledatastore.h \
     MDesktopEntry
 
-pcfiles.files += mlite.pc
+pcfiles.files += $${PROJECT_NAME}.pc
 pcfiles.path += $$INSTALL_ROOT/$$[QT_INSTALL_LIBS]/pkgconfig
 
 headers.files += $$INSTALL_HEADERS
-headers.path += $$INSTALL_ROOT/usr/include/mlite
+headers.path += $$INSTALL_ROOT/usr/include/$${PROJECT_NAME}
 
 target.path += $$[QT_INSTALL_LIBS]
 
 INSTALLS += target headers pcfiles
 
 TRANSLATIONS += $${SOURCES} $${HEADERS} $${OTHER_FILES}
-VERSION = 0.0.10
-PROJECT_NAME = mlite
 
 dist.commands += rm -fR $${PROJECT_NAME}-$${VERSION} &&
 dist.commands += git clone . $${PROJECT_NAME}-$${VERSION} &&
